@@ -17,7 +17,6 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 # カレンダーのIDを入れる。(GUIから取得可能)
 CalendarId_event = 'b0o2ekiqe1ejla81a40g2g2h74@group.calendar.google.com' # イベントカレンダー
-CalendarId_space = 'c31eoppdvmm4m82nv4hnqmr42c@group.calendar.google.com' # 講義室カレンダー
 CalendarId_odisan = 'jtkqqd3lhmoijamsfuvbpqjt9o@group.calendar.google.com' # おじさんカレンダー
 
 # 日付の妥当性を判定
@@ -213,32 +212,6 @@ def tell_event(message, aa,bb,cc,dd,ee):    # aa,bb,cc,dd,eeは正規表現の�
         message.reply('妄言乙w(日程に誤情報が含まれている場合があります。ご確認ください。)', in_thread=True)
 
 
-@listen_to(r'講義室確認:(\d{4})(\s|-|.)(\d{1,2})(\s|-|.)(\d{1,2})', re.DOTALL)  #　講義室の書き込みを探知
-def tell_event(message, aa,bb,cc,dd,ee):    # aa,bb,cc,dd,eeは正規表現の都合上出てきてしまう返り値(使わない)
-    text = message.body['text']
-    year,month,day = [0]*3
-    eventRegex = re.compile(r'講義室確認:(\d{4})(\s|-|.)(\d{1,2})(\s|-|.)(\d{1,2})$', re.DOTALL)
-
-    for groups in eventRegex.findall(text):
-        year,month,day = int(groups[0]), int(groups[2]), int(groups[4])
-
-    if (checkDate(year,month,day)):
-        events = see_in_GoogleCalender(year, month, day, CalendarId_space, Range=7) # 講義室情報を取得
-        if not events:
-            message.reply('その日の前後一週間の講義室はどこが取られているのか知りたいのカナ❓❓😳\nよーし笑　オヂサン、頑張っちゃうぞ❗️💪😂\n\n\n'+ 'アラ(^_^;)　どこも取られてなかったナ💦\nそしたら、その日は、オヂサン😎と美味しい焼肉🥓で班活💕なんて、どうカナ⁉️\nナンチャッテ😁', in_thread=True)
-        else:
-            event_summary_list = []
-            for event in events:
-                time = event['start'].get('dateTime', event['start'].get('date'))
-                time = datetime.datetime.strptime(time[:-6], '%Y-%m-%dT%H:%M:%S')
-                time_str = datetime.datetime.strftime(time, '%Y/%m/%d/%H:%M:%S')
-                event_summary = '・' + time_str[5:-3] + ' : ' + str(event['summary'])
-                event_summary_list.append(event_summary)
-            message.reply('その日の前後一週間の講義室はどこが取られているのか知りたいのカナ❓❓😳\nよーし笑　オヂサン、頑張っちゃうぞ❗️💪😂\n\n\n'+ '以下の講義室が取られていました。\n' +'\n'.join(event_summary_list), in_thread=True)
-    else:
-        message.reply('妄言乙w(日程に誤情報が含まれている場合があります。ご確認ください。)', in_thread=True)
-
-
 @listen_to(r'おじさん確認:(\d{4})(\s|-|.)(\d{1,2})(\s|-|.)(\d{1,2})', re.DOTALL)  #　おじさんの書き込みを探知
 def tell_event(message, aa,bb,cc,dd,ee):    # aa,bb,cc,dd,eeは正規表現の都合上出てきてしまう返り値(使わない)
     text = message.body['text']
@@ -273,5 +246,4 @@ def tell_use(message):
     (時間まで指定してください。区切り文字は、「/ . -」の３ついずれも使えます。)\n
     (改行後の文章もメッセージ終わりまで「内容」に含まれます。)\n(時間は、例えば「午後5時5分」なら、「17:05」のように表記してください。また、内容は32文字以下までしか受け付けていません。)\n\n
     【イベントが入っているか確認する】\n>イベント確認:2020/10/30\n\n上のように確認したい日程を投稿してください。\n前後二週間のイベント情報を取得できます。\n\n
-    【講義室情報を確認する】\n>講義室確認:2020/10/30\n\n上のように確認したい日程を投稿してください。\n前後一週間の講義室情報を取得できます。\n\n
     【おじさん情報を確認する】\n>おじさん確認:2020/10/30\n\n上のように確認したい日程を投稿してください。\n前後一週間のおじさんが書き込んだ予定を取得できます。''', in_thread=True)
