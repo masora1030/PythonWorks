@@ -1,4 +1,4 @@
-https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレームをベースラインに用いて作成した、Google Callendarを参照してくれる[Slack](https://slack.com)のチャットボットです。
+https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレームをベースラインに用いて作成した、Google Callendarを参照してくれる[Slack](https://slack.com)のおじさん風味なチャットボットです。
 
 
 ## 機能
@@ -35,37 +35,39 @@ https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレー�
 
 
 
-   【講義室情報を確認する】
-```
-講義室確認:2020/10/30
-```
-上のようにslackチャンネル内で確認したい日程を投稿してください。
-前後一週間の講義室情報を取得できます。
-
-
-
    【自作予定情報を確認する】
 ```
 おじさん確認:2020/10/30
 ```
 上のように確認したい日程を投稿してください。
-前後一週間のおじさんが自作カレンダーに書き込んだ予定を取得できます。
+前後一週間の自作カレンダーに書き込まれた予定を取得できます。
 
 
 
 ## 使い方
 
-### 環境構築
+pipコマンドが使えること、Python3 (3.6.8)が入っていること、slackのワークスペースが作成されていること、Google Calendarが有効になっているGoogleアカウントを持っていることが前提条件です。
 
-pipコマンドが使えること、Python3 (3.6.8)が入っていること、slackのワークスペースが作成されていること、Googleアカウントを持っていることが前提条件です。
-
-まずは、以下のコマンドでslackbotライブラリをインストールします。
+1. まずは、以下のコマンドでslackbotライブラリをインストールします。
 
 ```
 pip install slackbot
 ```
 
-次に、SlackのAPIトークンを取得します。[slack bot](https://my.slack.com/services/new/bot)から、slackの新しいBotを作成します。作ったbotはテスト用のチャンネルに招待しておきます。
+2. 次に、SlackのAPIトークンを取得します。[slack bot](https://my.slack.com/services/new/bot)から、slackの新しいBotを作成します。作ったbotはテスト用のチャンネルに招待しておきます。作成したslackbotのインテグレーションページでAPIトークンを確認し、メモします。
+
+
+3. Google Calender APIも使えるようにしておきます。[Python Quickstart](https://developers.google.com/calendar/quickstart/python?hl=ja)に用意したGoogleアカウントにログインした状態でアクセスします。そして「ENABLE THE GOOGLE CALENDAR API」というボタンを押し下します。新しく出てきたwindow内の「DOWNLOAD CLIENT CONFIGURATION」というボタンを押して、credentials.jsonというファイルをダウンロードします。(ここで、client IDとclient secretはメモする必要はありません。)
+
+4. Google Client Libraryを以下のコマンドでインストールします。
+```
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+```
+
+5. [Google Calender](https://calendar.google.com/calendar/)のGUI上で、参照したいカレンダーのカレンダーIDを取得してください。カレンダーの設定から閲覧できます。(このslackbotで書き込みたいカレンダーと確認したいカレンダーが異なる場合は、[Google Calender](https://calendar.google.com/calendar/)のGUI上で予定書き込み用の新しいカレンダーを作成し、そのカレンダーIDも取得してください。)
+
+6. このgithubのディレクトリを適当なワークスペースにcloneしてください。その後、
+slackbot-develop/
 
 
 
