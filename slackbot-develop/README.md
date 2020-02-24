@@ -1,8 +1,14 @@
-https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレームをベースラインに用いて作成した、Google Callendarを参照してくれるChat botです。
+https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレームをベースラインに用いて作成した、Google Callendarを参照してくれる[Slack](https://slack.com)のチャットボットです。
 
-主な機能は以下の通りです。
 
-このslack-botは、リプライをつけなくてもslack-botの所属しているチャンネル内の投稿に自動で反応します。
+## 機能
+
+* slack [Real Time Messaging API](https://api.slack.com/rtm) に基づいています
+* チャンネル内の投稿を自動で同時に処理することができます
+* 接続が失われたときに自動的に再接続します
+* Python3 をサポートしています
+
+
 できることは現状以下の通りです。
 
    【イベントを作成する】
@@ -10,10 +16,14 @@ https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレー�
 日程:2020/10/30/10:30-19:30
 内容:SoraTakashimaの誕生日
 ```
-上のようにslackチャンネル内でイベント内容を投稿してください。
-   時間まで指定してください。区切り文字は、「/ . -」の３ついずれも使えます。
-   改行後の文章もメッセージ終わりまで「内容」に含まれます。
-   時間は、例えば「午後5時5分」なら、「17:05」のように表記してください。また、内容は32文字以下までしか受け付けていません。
+上のようにslackチャンネル内でイベント内容を投稿してください。登録したGoogle Calenderに投稿された内容の予定を書き込みます。
+ 
+   (時間まで指定してください。区切り文字は、「/ . -」の３ついずれも使えます。)
+
+   (改行後の文章もメッセージ終わりまで「内容」に含まれます。)
+
+   (時間は、例えば「午後5時5分」なら、「17:05」のように表記してください。また、内容は32文字以下までしか受け付けていません。)
+   
    
    
    【イベントが入っているか確認する】
@@ -24,12 +34,14 @@ https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレー�
 前後二週間のイベント情報を取得できます。
 
 
+
    【講義室情報を確認する】
 ```
 講義室確認:2020/10/30
 ```
 上のようにslackチャンネル内で確認したい日程を投稿してください。
 前後一週間の講義室情報を取得できます。
+
 
 
    【自作予定情報を確認する】
@@ -39,23 +51,20 @@ https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレー�
 上のように確認したい日程を投稿してください。
 前後一週間のおじさんが自作カレンダーに書き込んだ予定を取得できます。
 
-[llimllib/limbo](https://github.com/llimllib/limbo)と[will](https://github.com/skoczen/will)に触発された[Slack](https://slack.com)のチャットボットです。
 
-## 機能
 
-* slack [Real Time Messaging API](https://api.slack.com/rtm) に基づいています
-* プラグインの仕組みがシンプルです
-* メッセージは同時に処理することができます
-* 接続が失われたときに自動的に再接続します
-* Python3 をサポートしています
-* [Full-fledged functional tests](tests/functional/test_functional.py)
+## 使い方
 
-## インストール
+### 環境構築
 
+pipコマンドが使えること、Python3 (3.6.8)が入っていること、slackのワークスペースが作成されていること、Googleアカウントを持っていることが前提条件です。
+
+まずは、以下のコマンドで
 
 ```
 pip install slackbot
 ```
+
 
 ## 使用方法
 
