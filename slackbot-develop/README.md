@@ -73,7 +73,7 @@ slackbot-develop/slackbot/settings.py の中の<YOUR BOT token ID>部分を2ス�
    
 8. 3ステップ目で取得したcredentials.jsonというファイルを、slackbot-developディレクトリ直下においてください。
 
-9. コマンドプロンプト上でslackbot-developの中に入り、以下のコマンドを実行してください。するとslackbotが立ち上がり、slack上で機能が使えるようになっています。slackbotが招待されているチャンネルで機能をお試しください。(端末の接続が切れると、プロセスが中断されbotが機能しなくなります。再度使う場合は、もう一度下記コマンドを実行してslackbotを再起動してください。)
+9. コマンドプロンプト上でslackbot-developの中に入り、以下のコマンドを実行してください。するとslackbotが立ち上がり、slack上で機能が使えるようになっています。slackbotが招待されているチャンネルで機能をお試しください。(コマンドプロンプトが終了してプロセスが中断されると、botが機能しなくなります。再度使う場合は、もう一度下記コマンドを実行してslackbotを再起動してください。)
 
 ```
 python run.py
