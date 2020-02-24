@@ -59,11 +59,14 @@ https://github.com/lins05/slackbot/ のslack-bot開発用のワークフレー�
 
 pipコマンドが使えること、Python3 (3.6.8)が入っていること、slackのワークスペースが作成されていること、Googleアカウントを持っていることが前提条件です。
 
-まずは、以下のコマンドで
+まずは、以下のコマンドでslackbotライブラリをインストールします。
 
 ```
 pip install slackbot
 ```
+
+次に、SlackのAPIトークンを取得します。[slack bot](https://my.slack.com/services/new/bot)から、slackの新しいBotを作成します。作ったbotはテスト用のチャンネルに招待しておきます。
+
 
 
 ## 使用方法
